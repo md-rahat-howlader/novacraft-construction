@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | NovaCraft Construction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 p-6 md:p-12">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex justify-between items-center pb-6 border-b border-slate-800 mb-10">
+            <h1 class="text-3xl font-bold text-white">NovaCraft <span class="text-amber-500">Admin Dashboard</span></h1>
+            <a href="/" class="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-lg text-sm font-medium">← Back to Website</a>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-10">
+            <!-- Add New Project Form -->
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl h-fit">
+                <h2 class="text-xl font-bold mb-4 text-amber-400">Add New Project</h2>
+                <form action="/admin/add-project" method="POST" class="space-y-4">
+                    <input type="text" name="title" required placeholder="Project Title" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm">
+                    <select name="category" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm">
+                        <option value="Residential">Residential</option>
+                        <option value="Commercial">Commercial</option>
+                        <option value="Architectural">Architectural</option>
+                        <option value="Renovation">Renovation</option>
+                    </select>
+                    <input type="text" name="location" required placeholder="Location (e.g. Uttara, Dhaka)" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm">
+                    <div class="grid grid-cols-2 gap-3">
+                        <input type="text" name="year" required placeholder="Year (2026)" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm">
+                        <input type="text" name="area" required placeholder="Area (5,000 sq ft)" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm">
+                    </div>
+                    <input type="url" name="image" required placeholder="Image URL (https://...)" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm">
+                    <textarea name="description" rows="3" required placeholder="Short project description..." class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm"></textarea>
+                    <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 rounded-lg text-sm">
+                        + Publish Project
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right Column: Client Quotes & Manage Projects -->
+            <div class="lg:col-span-2 space-y-10">
+                <!-- Client Quotes -->
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+                    <h2 class="text-xl font-bold mb-4 text-white">Client Quote Requests ({{ quotes|length }})</h2>
+                    <div class="space-y-4">
+                        {% for q in quotes %}
+                        <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-amber-400">{{ q.name }} <span class="text-xs text-slate-400 font-normal">({{ q.email }} | {{ q.phone }})</span></h3>
+                                    <p class="text-xs text-slate-400 mt-1">Service: <strong class="text-white">{{ q.service }}</strong> | Budget: <strong class="text-emerald-400">{{ q.budget }}</strong></p>
+                                </div>
+                                <span class="text-xs text-slate-500">{{ q.created_at }}</span>
+                            </div>
+                            <p class="text-sm text-slate-300 mt-3 bg-slate-900 p-3 rounded-lg">{{ q.message }}</p>
+                        </div>
+                        {% else %}
+                        <p class="text-slate-500 text-sm">No quote requests yet.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Manage Existing Projects -->
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+                    <h2 class="text-xl font-bold mb-4 text-white">Published Projects ({{ projects|length }})</h2>
+                    <div class="space-y-3">
+                        {% for p in projects %}
+                        <div class="flex justify-between items-center bg-slate-950 border border-slate-800 p-3 rounded-xl">
+                            <div>
+                                <h4 class="font-bold text-sm">{{ p.title }}</h4>
+                                <p class="text-xs text-slate-400">{{ p.category }} • {{ p.location }}</p>
+                            </div>
+                            <a href="/admin/delete-project/{{ p._id }}" class="bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition">
+                                Delete
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
