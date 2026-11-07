@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaCraft Construction | Precision Engineering & Building</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-extrabold tracking-tight text-white">
+                NOVA<span class="text-amber-500">CRAFT</span>
+            </a>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+                <a href="#services" class="hover:text-amber-400 transition">Services</a>
+                <a href="#projects" class="hover:text-amber-400 transition">Projects (10+)</a>
+                <a href="#quote" class="hover:text-amber-400 transition">Request Quote</a>
+                <a href="/admin" class="text-amber-500 hover:underline">Admin Panel</a>
+            </div>
+            <a href="#quote" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-5 py-2.5 rounded-lg text-sm transition">
+                Get Free Quote
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative py-20 px-6 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 border-b border-slate-800 text-center md:text-left">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="inline-block bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-semibold px-3 py-1 rounded-full mb-4">
+                    ESTABLISHED EXCELLENCE IN CONSTRUCTION
+                </span>
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight text-white mb-6">
+                    Building Landmarks With <span class="text-amber-500">Structural Precision.</span>
+                </h1>
+                <p class="text-slate-400 text-lg mb-8 leading-relaxed">
+                    Explore NovaCraft Construction's portfolio of 10+ completed residential, commercial, and industrial engineering landmarks built for enduring strength.
+                </p>
+                <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                    <a href="#quote" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-7 py-3.5 rounded-lg transition">
+                        Start Your Project
+                    </a>
+                    <a href="#projects" class="border border-slate-700 hover:border-amber-500 text-white font-semibold px-7 py-3.5 rounded-lg transition">
+                        View All Projects
+                    </a>
+                </div>
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=900&q=80" alt="Construction Site" class="rounded-2xl shadow-2xl border border-slate-800">
+            </div>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-14">
+            <h2 class="text-3xl md:text-4xl font-bold text-white">Our Core Expertise</h2>
+            <p class="text-slate-400 mt-3">Comprehensive engineering and construction services tailored to your vision.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl hover:border-amber-500/50 transition">
+                <div class="w-12 h-12 bg-amber-500/10 text-amber-500 rounded-xl flex items-center justify-center font-bold text-xl mb-5">01</div>
+                <h3 class="text-xl font-bold text-white mb-3">Residential Construction</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Custom luxury homes, duplexes, and multi-family apartment buildings crafted with premium materials.</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl hover:border-amber-500/50 transition">
+                <div class="w-12 h-12 bg-amber-500/10 text-amber-500 rounded-xl flex items-center justify-center font-bold text-xl mb-5">02</div>
+                <h3 class="text-xl font-bold text-white mb-3">Commercial & Industrial</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Corporate towers, retail hubs, and pre-engineered steel factories designed for high performance.</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl hover:border-amber-500/50 transition">
+                <div class="w-12 h-12 bg-amber-500/10 text-amber-500 rounded-xl flex items-center justify-center font-bold text-xl mb-5">03</div>
+                <h3 class="text-xl font-bold text-white mb-3">Architectural & Renovation</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">3D structural design, interior remodeling, and structural retrofitting to modernize existing spaces.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-6 bg-slate-900/50 border-y border-slate-800">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <span class="text-amber-500 font-semibold text-sm uppercase tracking-wider">Portfolio Showcase</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mt-1">Our Completed Projects ({{ projects|length }}+)</h2>
+                </div>
+                <p class="text-slate-400 text-sm mt-2 md:mt-0">Click any project card to view full specifications</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                {% for project in projects %}
+                <div onclick="openModal('{{ project.title }}', '{{ project.category }}', '{{ project.location }}', '{{ project.year }}', '{{ project.area }}', '{{ project.image }}', '{{ project.description }}')" class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden group hover:border-amber-500/50 cursor-pointer transition transform hover:-translate-y-1 shadow-lg">
+                    <div class="h-52 overflow-hidden relative">
+                        <img src="{{ project.image }}" alt="{{ project.title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 right-3 bg-slate-950/80 backdrop-blur text-amber-400 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">
+                            {{ project.category }}
+                        </span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center text-xs text-slate-400 font-medium mb-2">
+                            <span>📍 {{ project.location }}</span>
+                            <span>📅 {{ project.year }}</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-amber-400 transition">{{ project.title }}</h3>
+                        <p class="text-slate-400 text-sm line-clamp-2 mb-4">{{ project.description }}</p>
+                        <div class="pt-4 border-t border-slate-800 flex justify-between items-center text-xs text-amber-500 font-semibold">
+                            <span>View Full Details &rarr;</span>
+                            <span class="text-slate-400">Area: {{ project.area }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Details Modal -->
+    <div id="projectModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 max-w-2xl w-full rounded-3xl overflow-hidden shadow-2xl relative animate-in fade-in zoom-in duration-200">
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 bg-slate-950/70 hover:bg-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition">
+                &times;
+            </button>
+            <div class="h-64 overflow-hidden">
+                <img id="modalImg" src="" alt="Project Image" class="w-full h-full object-cover">
+            </div>
+            <div class="p-8">
+                <div class="flex items-center justify-between mb-3">
+                    <span id="modalCategory" class="bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-semibold px-3 py-1 rounded-full"></span>
+                    <span id="modalYear" class="text-slate-400 text-sm"></span>
+                </div>
+                <h3 id="modalTitle" class="text-2xl font-bold text-white mb-3"></h3>
+                <p id="modalDesc" class="text-slate-300 text-sm leading-relaxed mb-6"></p>
+                <div class="grid grid-cols-2 gap-4 pt-4 border-t border-slate-800 text-sm">
+                    <div>
+                        <span class="text-slate-500 block text-xs">Location</span>
+                        <strong id="modalLocation" class="text-white"></strong>
+                    </div>
+                    <div>
+                        <span class="text-slate-500 block text-xs">Total Area</span>
+                        <strong id="modalArea" class="text-white"></strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quote Request Form -->
+    <section id="quote" class="py-20 px-6 max-w-4xl mx-auto">
+        <div class="bg-slate-900 border border-slate-800 p-8 md:p-12 rounded-3xl shadow-xl">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-white">Request a Project Consultation</h2>
+                <p class="text-slate-400 mt-2">Fill out the details below. Our engineering team will review and contact you within 24 hours.</p>
+            </div>
+
+            <form id="quoteForm" class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Full Name *</label>
+                        <input type="text" id="name" required placeholder="John Doe" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Email Address *</label>
+                        <input type="email" id="email" required placeholder="john@example.com" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500">
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Phone Number *</label>
+                        <input type="text" id="phone" required placeholder="+880 1XXX-XXXXXX" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Service Type</label>
+                        <select id="service" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500">
+                            <option value="Residential Construction">Residential Construction</option>
+                            <option value="Commercial Building">Commercial Building</option>
+                            <option value="Architectural Design">Architectural Design</option>
+                            <option value="Renovation & Remodeling">Renovation & Remodeling</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Estimated Budget</label>
+                        <select id="budget" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500">
+                            <option value="$20k - $50k">$20k - $50k</option>
+                            <option value="$50k - $150k">$50k - $150k</option>
+                            <option value="$150k - $500k">$150k - $500k</option>
+                            <option value="$500k+">$500k+</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">Project Scope & Details *</label>
+                    <textarea id="message" rows="4" required placeholder="Describe your land size, location, and construction goals..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500"></textarea>
+                </div>
+
+                <button type="submit" id="submitBtn" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-4 rounded-xl transition text-lg">
+                    Submit Quote Request
+                </button>
+            </form>
+
+            <div id="responseAlert" class="hidden mt-6 p-4 rounded-xl text-center font-medium"></div>
+        </div>
+    </section>
+
+    <footer class="border-t border-slate-800 py-8 text-center text-slate-500 text-sm">
+        &copy; 2026 NovaCraft Construction. Powered by Python Flask & MongoDB Atlas.
+    </footer>
+
+    <!-- JavaScript for Modal & Form -->
+    <script>
+        function openModal(title, category, location, year, area, image, desc) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalCategory').innerText = category;
+            document.getElementById('modalLocation').innerText = location;
+            document.getElementById('modalYear').innerText = "Completed: " + year;
+            document.getElementById('modalArea').innerText = area;
+            document.getElementById('modalImg').src = image;
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('projectModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').classList.add('hidden');
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('projectModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        document.getElementById('quoteForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const alertBox = document.getElementById('responseAlert');
+            btn.disabled = true;
+            btn.innerText = "Saving to Database...";
+
+            const payload = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                service: document.getElementById('service').value,
+                budget: document.getElementById('budget').value,
+                message: document.getElementById('message').value
+            };
+
+            try {
+                const res = await fetch('/api/quote', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await res.json();
+
+                alertBox.classList.remove('hidden', 'bg-red-500/20', 'text-red-400', 'bg-emerald-500/20', 'text-emerald-400');
+                if (result.success) {
+                    alertBox.classList.add('bg-emerald-500/20', 'text-emerald-400');
+                    alertBox.innerText = "✓ " + result.message;
+                    document.getElementById('quoteForm').reset();
+                } else {
+                    alertBox.classList.add('bg-red-500/20', 'text-red-400');
+                    alertBox.innerText = "Error: " + result.message;
+                }
+            } catch (err) {
+                alertBox.classList.remove('hidden');
+                alertBox.classList.add('bg-red-500/20', 'text-red-400');
+                alertBox.innerText = "Network error occurred!";
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Submit Quote Request";
+            }
+        });
+    </script>
+</body>
+</html>
